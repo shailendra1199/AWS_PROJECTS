@@ -2,7 +2,13 @@
 
 profile=( 'default' 'TOM' )
 
+user=$1
+
+okta-aws $1 sts get-caller-identity
+
 for elements in "${profile[@]}"; do
+    
+    okta-aws $elements sts get-caller-identity
 
 
     for region in `aws ec2  --profile $elements describe-regions --output text | cut -f4` ;do
